@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void OnClick () {
-		var csv = GameObject.Find ("CSVReader").GetComponent<CSVReader> ().SplitCsvGrid("");
+		var csv = CSVReader.SplitCsvGrid();
 		Debug.Log (csv.Length);
 	}
 }

@@ -29,10 +29,10 @@ public class CSVReader : MonoBehaviour
 	}
 
 	// splits a CSV file into a 2D string array
-	static public string[,] SplitCsvGrid(string csvText)
+	static public string[,] SplitCsvGrid(string csvText = "")
 	{
-		if (csvText.Equals(string.Empty)) 
-			csvText = (csvFile.text);
+        if (csvText.Equals(string.Empty))
+            csvText = Settings.Instance.csvFile.text;
 			
 		string[] lines = csvText.Split("\n"[0]); 
 
