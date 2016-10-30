@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour {
     float mult = 1;
 
     public GameObject showButton;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -103,5 +104,9 @@ public class MainMenu : MonoBehaviour {
                 tr.position = new Vector3(startX - (int)( _toolbarProcess.Progress * _toolbarDistance * openedToolbar), tr.position.y, tr.position.z);
             });
         }
+    }
+
+    void ShowMap () {
+
     }
 }
