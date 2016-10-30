@@ -9,6 +9,19 @@ public class Process {
 	private bool paused;
     private System.Action _callback;
 
+    public System.Action Callback
+    {
+        get
+        {
+            return _callback;
+        }
+        
+        set
+        {
+            _callback = value;
+        }
+    }
+
 	public bool Paused {
 		get {
 			return this.paused;
@@ -18,7 +31,7 @@ public class Process {
 		}
 	}	
 	public float Progress {
-		get { return elapsed/duration; }
+		get { return elapsed/duration < 1 ? elapsed/duration : 1; }
 		set { 
 			elapsed = value*duration;
 			if (float.IsNaN(elapsed))
@@ -43,7 +56,7 @@ public class Process {
 	
 	public bool IsFinished {
 		get {
-			return Progress>=1&&!looped;
+			return Progress >= 1 && !looped;
 		}
 	}
 	
@@ -54,7 +67,7 @@ public class Process {
 	}
 	
 	public void Update() {
-        if (paused)
+        if (paused || IsFinished)
             return;
 
 		elapsed += Time.deltaTime;
