@@ -22,6 +22,6 @@ public class TargetLogger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void OnGUI () {
-        GUI.Button(new Rect(Screen.width - 150, 0, 150, Screen.height), output);
+        //GUI.Button(new Rect(Screen.width - 150, 0, 150, Screen.height), output);
 	}
 }
