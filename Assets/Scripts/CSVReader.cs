@@ -4,10 +4,17 @@ using System.Linq;
 
 public class CSVReader : MonoBehaviour 
 {
-	public TextAsset csvFile; 
+	public TextAsset csvFile;
+
+    public string[,] grid;
+
+    public static CSVReader Instance { get; set; }
+
 	public void Start()
 	{
-		string[,] grid = SplitCsvGrid(csvFile.text);
+        Instance = this;
+
+		grid = SplitCsvGrid(csvFile.text);
 		Debug.Log("size = " + (1+ grid.GetUpperBound(0)) + "," + (1 + grid.GetUpperBound(1))); 
 
 		DebugOutputGrid(grid); 

@@ -7,7 +7,15 @@ public class MainMenu : MonoBehaviour {
     Process _movingProcess;
     float _movingTime = 0.5f;
 
+    public static MainMenu Instance;
+
     void Start () {
+        Instance = this;
+    }
+
+    public void Test () {
+        ContentManager.Instance.Set("1");
+        Show(ContentManager.Instance.gameObject.GetComponent<RectTransform>());
 
     }
 

@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using Vuforia;
 
 public class TrackingDetector : MonoBehaviour,
                                             ITrackableEventHandler
 {
+    public Text title;
+    public Text text;
+
+
     private TrackableBehaviour mTrackableBehaviour;
 
     bool showGUI = false;
@@ -36,6 +41,9 @@ public class TrackingDetector : MonoBehaviour,
             {
                 TargetLogger.Instance.targets.Add(targetName);
                 TargetLogger.Instance.output += targetName + "\n";
+
+                ContentManager.Instance.Set(targetName);
+                MainMenu.Instance.Show(ContentManager.Instance.gameObject.GetComponent<RectTransform>());
             }
         }
         else
@@ -49,6 +57,6 @@ public class TrackingDetector : MonoBehaviour,
         if (showGUI == false)
             return;
 
-        GUI.Button(new Rect(0, 0, 200, 100), targetName);
+        //GUI.Button(new Rect(0, 0, 200, 100), targetName);
     }
 }
