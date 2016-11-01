@@ -67,4 +67,8 @@ public class MainMenu : MonoBehaviour {
         };
     }
 
+    public void Reset () {
+        Application.LoadLevel(0);
+    }
+
 }
