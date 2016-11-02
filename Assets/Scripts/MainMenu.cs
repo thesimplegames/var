@@ -54,8 +54,10 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void Show(RectTransform rt) {
-        if (!InitMovingProcess())
+        if (!InitMovingProcess() || rt.tag == "Show")
             return;
+
+        rt.tag = "Show";
 
         float startX = rt.position.x;
         _movingProcess.Callback = () => {
@@ -65,8 +67,10 @@ public class MainMenu : MonoBehaviour {
     }
 
     public void Hide(RectTransform rt) {
-        if (!InitMovingProcess())
+        if (!InitMovingProcess() || rt.tag == "Hide")
             return;
+
+        rt.tag = "Hide";
 
         float startX = rt.position.x;
         _movingProcess.Callback = () => {

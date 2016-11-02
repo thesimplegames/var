@@ -12,7 +12,7 @@ public class TrackingDetector : MonoBehaviour,
 
     private TrackableBehaviour mTrackableBehaviour;
 
-    bool showGUI = false;
+    bool showGUI = true;
 
     string targetName;
 
@@ -42,11 +42,12 @@ public class TrackingDetector : MonoBehaviour,
                 TargetLogger.Instance.targets.Add(targetName);
                 TargetLogger.Instance.output += targetName + "\n";
 
-                ContentManager.Instance.Set(targetName);
-                MainMenu.Instance.Show(ContentManager.Instance.gameObject.GetComponent<RectTransform>());
             }
-        }
-        else
+
+            ContentManager.Instance.Set(targetName);
+            MainMenu.Instance.Show(ContentManager.Instance.gameObject.GetComponent<RectTransform>());
+
+        } else
         {
             showGUI = false;
         }
@@ -57,6 +58,8 @@ public class TrackingDetector : MonoBehaviour,
         if (showGUI == false)
             return;
 
-        //GUI.Button(new Rect(0, 0, 200, 100), targetName);
+        if (GUI.Button(new Rect(0, 0, 200, 100), targetName)) {
+            showGUI = false;
+        }
     }
 }
