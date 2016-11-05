@@ -46,7 +46,7 @@ public class TrackingDetector : MonoBehaviour,
 
             ContentManager.Instance.Set(targetName);
             MainMenu.Instance.Show(ContentManager.Instance.gameObject.GetComponent<RectTransform>());
-
+            
         } else
         {
             showGUI = false;
