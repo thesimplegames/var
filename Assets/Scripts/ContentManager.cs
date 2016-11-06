@@ -31,6 +31,7 @@ public class ContentManager : MonoBehaviour {
 
         _emptyStar = star.GetComponent<Image>().sprite;
         _fullStar = star.transform.GetChild(0).GetComponent<Image>().sprite;
+        _items = new Dictionary<string, Item>();
 	}
 	
     public void Set(string name) {

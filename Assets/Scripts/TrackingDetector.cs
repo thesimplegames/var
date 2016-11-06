@@ -6,8 +6,8 @@ using Vuforia;
 public class TrackingDetector : MonoBehaviour,
                                             ITrackableEventHandler
 {
-    public Text title;
-    public Text text;
+    //public Text title;
+    //public Text text;
 
 
     private TrackableBehaviour mTrackableBehaviour;
@@ -25,6 +25,8 @@ public class TrackingDetector : MonoBehaviour,
         }
 
         targetName = GetComponent<ImageTargetBehaviour>().TrackableName;
+
+        Debug.Log(targetName);
         
     }
 
@@ -43,6 +45,8 @@ public class TrackingDetector : MonoBehaviour,
                 TargetLogger.Instance.output += targetName + "\n";
 
             }
+
+            Debug.Log(targetName);
 
             ContentManager.Instance.Set(targetName);
             MainMenu.Instance.Show(ContentManager.Instance.gameObject.GetComponent<RectTransform>());
