@@ -10,6 +10,7 @@ public class ContentManager : MonoBehaviour {
     public Text header;
     public Text text;
     public GameObject star;
+    public Image picture;
     Sprite _fullStar;
     Sprite _emptyStar;
     string _currentName;
@@ -54,15 +55,21 @@ public class ContentManager : MonoBehaviour {
         for (int i = 0; i < grid.GetLength(1); i++) {
             if (name == grid[0, i]) {
                 MapController.Instance.SetPosition(grid[3, i]);
-                Set(grid[1, i], grid[2, i]);
+                Sprite sprite = Resources.Load<Sprite>("media/" + name);
+                if (sprite == null)
+                    sprite = Resources.Load<Sprite>("media/1");
+                Set(grid[1, i], grid[2, i], sprite as Sprite);
+
+
                 return;
             }
         }
     }
 
-    public void Set (string newHeader, string newText) {
+    public void Set(string newHeader, string newText, Sprite newSprite) {
         header.text = newHeader;
         text.text = newText;
+        picture.sprite = newSprite;
     }
 
     public void StarClick() {
