@@ -56,10 +56,11 @@ public class ContentManager : MonoBehaviour {
             if (name == grid[0, i]) {
                 MapController.Instance.SetPosition(grid[3, i]);
                 Sprite sprite = Resources.Load<Sprite>("media/" + name);
-                if (sprite == null)
+                int nameInt;
+                int.TryParse(name, out nameInt);
+                if (sprite == null || (nameInt > 20 || nameInt < 42))
                     sprite = Resources.Load<Sprite>("media/1");
                 Set(grid[1, i], grid[2, i], sprite as Sprite);
-
 
                 return;
             }
