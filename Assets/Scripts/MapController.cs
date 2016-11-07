@@ -20,8 +20,8 @@ public class MapController : MonoBehaviour {
 	}
 
     public void SetPosition(string pos) {
-        if (_current != null)
-            _current.SetActive(false);
+        //if (_current != null)
+        //    _current.SetActive(false);
 
         if (_locations.TryGetValue(pos, out _current))
             _current.SetActive(true);

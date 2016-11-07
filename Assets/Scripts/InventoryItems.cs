@@ -28,16 +28,48 @@ public class InventoryItems : MonoBehaviour {
         }
 	}
 
-    public void Set(string name, string header, string text, Sprite pic, Sprite starPic) {
+    public void Set(string name, string header, string text, Sprite pic, bool isLiked) {
         if (!_items.ContainsKey(_recognnized.ToString()))
             return;
-        Debug.Log(name);
-        //(if )
-        _items[_recognnized.ToString()].FindChild("Title").GetComponent<Text>().text = header;
-        _items[_recognnized.ToString()].FindChild("Text").GetComponent<Text>().text = text;
-        _items[_recognnized.ToString()].FindChild("Picture").GetComponent<Image>().sprite = pic;
-        //_items[_recognnized.ToString()].FindChild("Start").GetComponent<Image>().sprite = starPic;
-        _recognnized++;
+        //Debug.Log(name);
+        if (isLiked) {
+            foreach (var item in _items.Values) {
+                if (item.FindChild("Title").GetComponent<Text>().text == header) {
+                    return;
+                }
+            }
+
+            _items[_recognnized.ToString()].FindChild("Title").GetComponent<Text>().text = header;
+            _items[_recognnized.ToString()].FindChild("Text").GetComponent<Text>().text = text;
+            _items[_recognnized.ToString()].FindChild("Picture").GetComponent<Image>().sprite = pic;
+            _recognnized++;
+        } else {
+            int i = 0;
+            bool flag = false;
+            Transform prev = null;
+
+            foreach (var item in _items.Values) {
+                if (item.FindChild("Title").GetComponent<Text>().text == header) {
+                    flag = true;
+                    _recognnized--;
+                }
+
+                if (prev != null) {
+                    prev.FindChild("Title").GetComponent<Text>().text =
+                        item.FindChild("Title").GetComponent<Text>().text;
+                    prev.FindChild("Text").GetComponent<Text>().text =
+                        item.FindChild("Text").GetComponent<Text>().text;
+                    prev.FindChild("Picture").GetComponent<Image>().sprite =
+                        item.FindChild("Picture").GetComponent<Image>().sprite;
+                    item.FindChild("Title").GetComponent<Text>().text = "";
+                    item.FindChild("Text").GetComponent<Text>().text = "";
+                    item.GetComponent<Image>().sprite = new Sprite();
+                }
+
+                if (flag)
+                    prev = item;
+            }
+        }
     }
 
 }

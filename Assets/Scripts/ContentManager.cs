@@ -61,7 +61,7 @@ public class ContentManager : MonoBehaviour {
                 if (sprite == null || (nameInt > 20 && nameInt < 42))
                     sprite = Resources.Load<Sprite>("media/1");
                 Set(grid[1, i], grid[2, i], sprite as Sprite);
-                InventoryItems.Instance.Set(name, grid[1, i], grid[2, i], sprite as Sprite, _emptyStar);
+                //InventoryItems.Instance.Set(name, grid[1, i], grid[2, i], sprite as Sprite, _emptyStar);
                 return;
             }
         }
@@ -76,5 +76,12 @@ public class ContentManager : MonoBehaviour {
     public void StarClick() {
         _items[_currentName].isLiked = !_items[_currentName].isLiked;
         star.GetComponent<Image>().sprite = _items[_currentName].isLiked ? _fullStar : _emptyStar;
+    }
+
+    public void ApplyStar() {
+        var grid = CSVReader.Instance.grid;
+
+//        if (_items[_currentName].isLiked)
+        InventoryItems.Instance.Set(name, header.text, text.text, picture.sprite, _items[_currentName].isLiked);
     }
 }
