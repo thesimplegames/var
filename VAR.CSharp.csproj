@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\MapController.cs" />
     <Compile Include="Assets\Scripts\Process.cs" />
+    <Compile Include="Assets\Scripts\SelfTurnOf.cs" />
     <Compile Include="Assets\Scripts\Settings.cs" />
     <Compile Include="Assets\Scripts\TargetLogger.cs" />
     <Compile Include="Assets\Scripts\TrackingDetector.cs" />
