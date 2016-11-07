@@ -58,10 +58,10 @@ public class ContentManager : MonoBehaviour {
                 Sprite sprite = Resources.Load<Sprite>("media/" + name);
                 int nameInt;
                 int.TryParse(name, out nameInt);
-                if (sprite == null || (nameInt > 20 || nameInt < 42))
+                if (sprite == null || (nameInt > 20 && nameInt < 42))
                     sprite = Resources.Load<Sprite>("media/1");
                 Set(grid[1, i], grid[2, i], sprite as Sprite);
-
+                InventoryItems.Instance.Set(name, grid[1, i], grid[2, i], sprite as Sprite, _emptyStar);
                 return;
             }
         }

@@ -7,6 +7,8 @@ public class InventoryItems : MonoBehaviour {
 
     public static InventoryItems Instance;
     Dictionary<string, Transform> _items;
+    int _recognnized = 1;
+
 	// Use this for initialization
 	void Start () {
         Instance = this;
@@ -26,14 +28,16 @@ public class InventoryItems : MonoBehaviour {
         }
 	}
 
-    void SetState(string name, string header, string text, Sprite pic, Sprite starPic) {
-        if (!_items.ContainsKey(name))
+    public void Set(string name, string header, string text, Sprite pic, Sprite starPic) {
+        if (!_items.ContainsKey(_recognnized.ToString()))
             return;
-
-        _items[name].FindChild("Title").GetComponent<Text>().text = header;
-        _items[name].FindChild("Text").GetComponent<Text>().text = text;
-        _items[name].FindChild("Picture").GetComponent<Image>().sprite = pic;
-        _items[name].FindChild("Start").GetComponent<Image>().sprite = starPic;
+        Debug.Log(name);
+        //(if )
+        _items[_recognnized.ToString()].FindChild("Title").GetComponent<Text>().text = header;
+        _items[_recognnized.ToString()].FindChild("Text").GetComponent<Text>().text = text;
+        _items[_recognnized.ToString()].FindChild("Picture").GetComponent<Image>().sprite = pic;
+        //_items[_recognnized.ToString()].FindChild("Start").GetComponent<Image>().sprite = starPic;
+        _recognnized++;
     }
 
 }
