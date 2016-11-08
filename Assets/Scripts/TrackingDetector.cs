@@ -26,7 +26,7 @@ public class TrackingDetector : MonoBehaviour,
 
         targetName = GetComponent<ImageTargetBehaviour>().TrackableName;
 
-        Debug.Log(targetName);
+        //Debug.Log(targetName);
         
     }
 

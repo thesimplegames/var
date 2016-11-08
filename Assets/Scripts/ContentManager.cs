@@ -10,6 +10,7 @@ public class ContentManager : MonoBehaviour {
     public Text header;
     public Text text;
     public GameObject star;
+    public Image picture;
     Sprite _fullStar;
     Sprite _emptyStar;
     string _currentName;
@@ -54,19 +55,33 @@ public class ContentManager : MonoBehaviour {
         for (int i = 0; i < grid.GetLength(1); i++) {
             if (name == grid[0, i]) {
                 MapController.Instance.SetPosition(grid[3, i]);
-                Set(grid[1, i], grid[2, i]);
+                Sprite sprite = Resources.Load<Sprite>("media/" + name);
+                int nameInt;
+                int.TryParse(name, out nameInt);
+                if (sprite == null || (nameInt > 20 && nameInt < 42))
+                    sprite = Resources.Load<Sprite>("media/1");
+                Set(grid[1, i], grid[2, i], sprite as Sprite);
+                //InventoryItems.Instance.Set(name, grid[1, i], grid[2, i], sprite as Sprite, _emptyStar);
                 return;
             }
         }
     }
 
-    public void Set (string newHeader, string newText) {
+    public void Set(string newHeader, string newText, Sprite newSprite) {
         header.text = newHeader;
         text.text = newText;
+        picture.sprite = newSprite;
     }
 
     public void StarClick() {
         _items[_currentName].isLiked = !_items[_currentName].isLiked;
         star.GetComponent<Image>().sprite = _items[_currentName].isLiked ? _fullStar : _emptyStar;
+    }
+
+    public void ApplyStar() {
+        var grid = CSVReader.Instance.grid;
+
+//        if (_items[_currentName].isLiked)
+        InventoryItems.Instance.Set(name, header.text, text.text, picture.sprite, _items[_currentName].isLiked);
     }
 }
