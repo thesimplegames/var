@@ -14,6 +14,7 @@ public class ContentManager : MonoBehaviour {
     Sprite _fullStar;
     Sprite _emptyStar;
     string _currentName;
+    string _position;
 
 
     class Item {
@@ -54,7 +55,8 @@ public class ContentManager : MonoBehaviour {
         var grid = CSVReader.Instance.grid;
         for (int i = 0; i < grid.GetLength(1); i++) {
             if (name == grid[0, i]) {
-                MapController.Instance.SetPosition(grid[3, i]);
+                //MapController.Instance.SetPosition(grid[3, i]);
+                _position = grid[3, i];
                 Sprite sprite = Resources.Load<Sprite>("media/" + name);
                 int nameInt;
                 int.TryParse(name, out nameInt);
@@ -81,7 +83,9 @@ public class ContentManager : MonoBehaviour {
     public void ApplyStar() {
         var grid = CSVReader.Instance.grid;
 
-//        if (_items[_currentName].isLiked)
-        InventoryItems.Instance.Set(name, header.text, text.text, picture.sprite, _items[_currentName].isLiked);
+        if (_items[_currentName].isLiked) {
+            MapController.Instance.SetPosition(_position);
+            InventoryItems.Instance.Set(name, header.text, text.text, picture.sprite, _items[_currentName].isLiked);
+        }
     }
 }
