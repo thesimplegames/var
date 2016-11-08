@@ -81,12 +81,8 @@ public class ContentManager : MonoBehaviour {
     }
 
     public void ApplyStar() {
-        var grid = CSVReader.Instance.grid;
-
-        if (_items[_currentName].isLiked) {
-            MapController.Instance.SetPosition(_position);
-        }
-
+        //var grid = CSVReader.Instance.grid;
+        MapController.Instance.SetPosition(_position, name, _items[_currentName].isLiked);
         InventoryItems.Instance.Set(name, header.text, text.text, picture.sprite, _items[_currentName].isLiked);
     }
 }
