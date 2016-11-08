@@ -47,11 +47,15 @@ public class InventoryItems : MonoBehaviour {
             int i = 0;
             bool flag = false;
             Transform prev = null;
+            
 
             foreach (var item in _items.Values) {
                 if (item.FindChild("Title").GetComponent<Text>().text == header) {
                     flag = true;
                     _recognnized--;
+                    item.FindChild("Title").GetComponent<Text>().text = "";
+                    item.FindChild("Text").GetComponent<Text>().text = "";
+                    item.GetComponent<Image>().sprite = new Sprite();
                 }
 
                 if (prev != null) {
@@ -69,6 +73,7 @@ public class InventoryItems : MonoBehaviour {
                 if (flag)
                     prev = item;
             }
+            
         }
     }
 

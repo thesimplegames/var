@@ -85,7 +85,8 @@ public class ContentManager : MonoBehaviour {
 
         if (_items[_currentName].isLiked) {
             MapController.Instance.SetPosition(_position);
-            InventoryItems.Instance.Set(name, header.text, text.text, picture.sprite, _items[_currentName].isLiked);
         }
+
+        InventoryItems.Instance.Set(name, header.text, text.text, picture.sprite, _items[_currentName].isLiked);
     }
 }
