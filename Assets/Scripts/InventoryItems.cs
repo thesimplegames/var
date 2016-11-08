@@ -17,7 +17,7 @@ public class InventoryItems : MonoBehaviour {
         RectTransform rt = gameObject.GetComponent<RectTransform>();
         GameObject prefab = Resources.Load<GameObject>("prefabs/inventoryItem");
         //GameObject prefab = transform.GetChild(0).gameObject;
-        for (int i = -2; i < 80; i++) {
+        for (int i = -5; i < 80; i++) {
             GameObject newGO = Instantiate(prefab);
             newGO.transform.SetParent(transform);
             newGO.GetComponent<RectTransform>().localPosition = new Vector3(0, -333 * i + 800 + 333, 0);
