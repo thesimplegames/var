@@ -62,8 +62,11 @@ public class ContentManager : MonoBehaviour {
                 int.TryParse(name, out nameInt);
 
                 if (name == "21" || name == "24")
+#if !UNITY_IPHONE
                     PlayVideo.Instance.Play(name);
-
+#else
+                    Handheld.PlayFullScreenMovie("movie/" + name + ".mp4");
+#endif
                 if (sprite == null || (nameInt > 20 && nameInt < 42))
                     sprite = Resources.Load<Sprite>("media/1");
                 Set(grid[1, i], grid[2, i], sprite as Sprite);

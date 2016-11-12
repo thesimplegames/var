@@ -5,6 +5,8 @@ using System.Collections.Generic;
 [RequireComponent (typeof(AudioSource))]
 public class PlayVideo : MonoBehaviour {
 
+#if !UNITY_IPHONE
+
     public static PlayVideo Instance;
 
     //public MovieTexture movie21;
@@ -46,5 +48,19 @@ public class PlayVideo : MonoBehaviour {
         _image.enabled = state;
         _audio.enabled = state;
     }
+#else
 
+    public static PlayVideo Instance;
+
+    void Start () {
+        Instance = this;
+
+
+    }
+
+    void Play(string name) {
+        Handheld.PlayFullScreenMovie("movie/" + name + ".mp4");
+    }
+
+#endif
 }
