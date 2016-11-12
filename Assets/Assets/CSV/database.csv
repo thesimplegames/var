@@ -19,8 +19,8 @@ ID,Title,Description,Section_ID
 18,Salinity sensors,Soil salinity sensor measures in-situ soil salinity without continuous disruption to soil. Burying sensors at various depths and their connection to data logger provides soil salinity information over a long period.,3
 19,pH meter,"It measures soil or water pH to determine if the samples are acidic (< pH 7), Neutral (pH 7) or alkaline (pH > 7). The pH value also indicates soils nutrient availability status.",3
 20,Conductivity meter,It measures electrical conductivity to express soil and water salinity. The higher salt contents give higher electrical conductivity.,3
-21,"Clay, Silt and Sand",,4
-24,Rock types,,5
+21,"Clay, Silt and Sand",Tap on play button to watch video,4
+24,Rock types,Tap on play button to watch video,5
 42,Soil Profile,"A vertical section of the soil from the ground surface downwards to where the soil meets the underlying rock. A typical profile consists of six layers also called soil horizons. With depth the horizons differ in color, texture, structure and biological activity. Six layers are; O - surface litter or organic matter; A - top soil; E - zones of leaching; B - subsoil; C - parent material; and R - bedrock.",6
 43,Dredged sand,"It is collected from the sea base, it is rich in fresh and broken sea shells, few converted into sand sized particles. Dredged sand is highly rich in calcium carbonates and salts. Scientists consider these sea shells as a way of carbon sequestration by the sea.",7
 44,Coastal sand,Coastal sand is white in color developed through the continuous weathering of sea shells. It occurs mostly near the sea coast. Scientists consider this land once under the sea. Like dredged sand it is rich in calcium carbonates and high in salts levels.,7

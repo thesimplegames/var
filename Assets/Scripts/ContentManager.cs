@@ -15,6 +15,7 @@ public class ContentManager : MonoBehaviour {
     Sprite _emptyStar;
     string _currentName;
     string _position;
+    public GameObject playButton;
 
 
     class Item {
@@ -34,6 +35,7 @@ public class ContentManager : MonoBehaviour {
         _emptyStar = star.GetComponent<Image>().sprite;
         _fullStar = star.transform.GetChild(0).GetComponent<Image>().sprite;
         _items = new Dictionary<string, Item>();
+        playButton.SetActive(false);
 	}
 	
     public void Set(string name) {
@@ -62,13 +64,10 @@ public class ContentManager : MonoBehaviour {
                 int.TryParse(name, out nameInt);
 
                 if (name == "21" || name == "24")
-#if !UNITY_IPHONE
-                    PlayVideo.Instance.Play(name);
-#else
-                    Handheld.PlayFullScreenMovie("movie/" + name + ".mp4");
-#endif
-                if (sprite == null || (nameInt > 20 && nameInt < 42))
-                    sprite = Resources.Load<Sprite>("media/1");
+                    playButton.SetActive(true);
+
+                //if (sprite == null || (nameInt > 20 && nameInt < 42))
+                  //  sprite = Resources.Load<Sprite>("media/1");
                 Set(grid[1, i], grid[2, i], sprite as Sprite);
                 //InventoryItems.Instance.Set(name, grid[1, i], grid[2, i], sprite as Sprite, _emptyStar);
                 return;
@@ -92,5 +91,9 @@ public class ContentManager : MonoBehaviour {
         //var grid = CSVReader.Instance.grid;
         MapController.Instance.SetPosition(_position, name, _items[_currentName].isLiked);
         InventoryItems.Instance.Set(name, header.text, text.text, picture.sprite, _items[_currentName].isLiked);
+    }
+
+    public void PlayVideo() {
+        Handheld.PlayFullScreenMovie("movie/" + _currentName + ".mp4");
     }
 }
