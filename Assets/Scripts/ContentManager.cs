@@ -60,6 +60,10 @@ public class ContentManager : MonoBehaviour {
                 Sprite sprite = Resources.Load<Sprite>("media/" + name);
                 int nameInt;
                 int.TryParse(name, out nameInt);
+
+                if (name == "21" || name == "24")
+                    PlayVideo.Instance.Play(name);
+
                 if (sprite == null || (nameInt > 20 && nameInt < 42))
                     sprite = Resources.Load<Sprite>("media/1");
                 Set(grid[1, i], grid[2, i], sprite as Sprite);
@@ -74,6 +78,7 @@ public class ContentManager : MonoBehaviour {
         text.text = newText;
         picture.sprite = newSprite;
     }
+
 
     public void StarClick() {
         _items[_currentName].isLiked = !_items[_currentName].isLiked;
