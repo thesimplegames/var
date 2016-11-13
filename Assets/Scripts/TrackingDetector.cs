@@ -12,7 +12,7 @@ public class TrackingDetector : MonoBehaviour,
 
     private TrackableBehaviour mTrackableBehaviour;
 
-    bool showGUI = true;
+    bool showGUI = false;
 
     string targetName;
 
