@@ -94,6 +94,7 @@ public class ContentManager : MonoBehaviour {
     }
 
     public void PlayVideo() {
+        Debug.Log("Play video " + _currentName);
         Handheld.PlayFullScreenMovie("movie/" + _currentName + ".mp4");
     }
 }
