@@ -21,6 +21,7 @@ public class InventoryItems : MonoBehaviour {
             GameObject newGO = Instantiate(prefab);
             newGO.transform.SetParent(transform);
             newGO.GetComponent<RectTransform>().localPosition = new Vector3(0, -333 * i + 800 + 333, 0);
+			newGO.transform.localScale = Vector3.one;
             newGO.name =  i.ToString(); 
             rt.position = new Vector3(rt.position.x, rt.position.y - 333 / 2, rt.position.z);
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y);
