@@ -59,6 +59,8 @@ public class TrackingDetector : MonoBehaviour,
 
     void OnGUI ()
     {
+		return;
+
         if (showGUI == false)
             return;
 
