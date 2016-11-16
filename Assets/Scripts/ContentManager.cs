@@ -89,8 +89,8 @@ public class ContentManager : MonoBehaviour {
 
     public void ApplyStar() {
         //var grid = CSVReader.Instance.grid;
-        MapController.Instance.SetPosition(_position, name, _items[_currentName].isLiked);
-        InventoryItems.Instance.Set(name, header.text, text.text, picture.sprite, _items[_currentName].isLiked);
+		MapController.Instance.SetPosition(_position, _currentName, _items[_currentName].isLiked);
+		InventoryItems.Instance.Set(_currentName, header.text, text.text, picture.sprite, _items[_currentName].isLiked);
     }
 
     public void PlayVideo() {
@@ -98,8 +98,5 @@ public class ContentManager : MonoBehaviour {
         Handheld.PlayFullScreenMovie("movies/" + _currentName + ".mp4");
     }
 
-    public void TestVideo(string name) {
-        Debug.Log("Play video " + name);
-        Handheld.PlayFullScreenMovie("movies/" + name + ".mp4");
-    }
+ 
 }

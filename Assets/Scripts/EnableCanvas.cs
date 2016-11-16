@@ -18,6 +18,17 @@ public class EnableCanvas : MonoBehaviour {
 
 		if (Screen.width != 1080)
 			iPhone6plus.SetActive (false);
+
+		if (Screen.width == 640) {
+			iPhone6.SetActive (true);
+
+			for (int i = 0; i < iPhone6.transform.childCount; i++) {
+				iPhone6.transform.GetChild (i).position += Vector3.up * 100;
+			}
+
+			iPhone6.transform.position += Vector3.up * 100;
+		}
+
 	}
 	
 	// Update is called once per frame

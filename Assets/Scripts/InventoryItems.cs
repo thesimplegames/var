@@ -6,7 +6,8 @@ using System.Collections.Generic;
 public class InventoryItems : MonoBehaviour {
 
     public static InventoryItems Instance;
-    Dictionary<string, Transform> _items;
+    public Dictionary<string, Transform> _items;
+	public Dictionary<string, string> liked = new Dictionary<string, string> ();
     int _recognnized = 1;
 
 	// Use this for initialization
@@ -29,11 +30,18 @@ public class InventoryItems : MonoBehaviour {
         }
 	}
 
-    public void Set(string name, string header, string text, Sprite pic, bool isLiked) {
+    public void Set(string itemName, string header, string text, Sprite pic, bool isLiked) {
         if (!_items.ContainsKey(_recognnized.ToString()))
             return;
+
+
         //Debug.Log(name);
         if (isLiked) {
+			if (!liked.ContainsKey (_recognnized.ToString ())) {
+				liked.Add (_recognnized.ToString (), itemName);
+				Debug.Log (liked [_recognnized.ToString ()]);
+			}
+
             foreach (var item in _items.Values) {
                 if (item.FindChild("Title").GetComponent<Text>().text == header) {
                     return;
@@ -43,8 +51,11 @@ public class InventoryItems : MonoBehaviour {
             _items[_recognnized.ToString()].FindChild("Title").GetComponent<Text>().text = header;
             _items[_recognnized.ToString()].FindChild("Text").GetComponent<Text>().text = text;
             _items[_recognnized.ToString()].FindChild("Picture").GetComponent<Image>().sprite = pic;
+			_items[_recognnized.ToString()].FindChild("Hidden").GetComponent<Text>().text = itemName;
             _recognnized++;
         } else {
+			liked.Remove (_recognnized.ToString());
+
             int i = 0;
             bool flag = false;
             Transform prev = null;
@@ -56,18 +67,22 @@ public class InventoryItems : MonoBehaviour {
                     _recognnized--;
                     item.FindChild("Title").GetComponent<Text>().text = "";
                     item.FindChild("Text").GetComponent<Text>().text = "";
+					item.FindChild("Hidden").GetComponent<Text>().text = "";
                     item.GetComponent<Image>().sprite = new Sprite();
                 }
 
                 if (prev != null) {
-                    prev.FindChild("Title").GetComponent<Text>().text =
-                        item.FindChild("Title").GetComponent<Text>().text;
+					prev.FindChild("Hidden").GetComponent<Text>().text =
+						item.FindChild("Hidden").GetComponent<Text>().text;
+					prev.FindChild("Title").GetComponent<Text>().text =
+						item.FindChild("Title").GetComponent<Text>().text;
                     prev.FindChild("Text").GetComponent<Text>().text =
                         item.FindChild("Text").GetComponent<Text>().text;
                     prev.FindChild("Picture").GetComponent<Image>().sprite =
                         item.FindChild("Picture").GetComponent<Image>().sprite;
                     item.FindChild("Title").GetComponent<Text>().text = "";
                     item.FindChild("Text").GetComponent<Text>().text = "";
+					item.FindChild("Hidden").GetComponent<Text>().text = "";
                     item.GetComponent<Image>().sprite = new Sprite();
                 }
 

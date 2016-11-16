@@ -12,5 +12,8 @@
         <namespace fullname="System.Text.RegularExpressions;" preserve="all"/>
         <namespace fullname="System.IO;" preserve="all"/>
         <namespace fullname="System;" preserve="all"/>
+<type fullname="System.Net.Configuration.MailSettingsSectionGroup" preserve="all"/>
+<type fullname="System.Net.Configuration.SmtpSection" preserve="all"/>
+<type fullname="System.Net.Configuration.SmtpNetworkElement" preserve="all"/>
     </assembly>
 </linker>
