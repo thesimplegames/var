@@ -9,6 +9,7 @@ public class TrackingDetector : MonoBehaviour,
     //public Text title;
     //public Text text;
 
+	public static GameObject mapButtonAsFlagToKnowWeAreOnTheCameraScreen;
 
     private TrackableBehaviour mTrackableBehaviour;
 
@@ -25,13 +26,14 @@ public class TrackingDetector : MonoBehaviour,
         }
 
         targetName = GetComponent<ImageTargetBehaviour>().TrackableName;
-
-        //Debug.Log(targetName);
-        
     }
 
     public void OnTrackableStateChanged(TrackableBehaviour.Status previousStatus, TrackableBehaviour.Status newStatus)
     {
+		if (!mapButtonAsFlagToKnowWeAreOnTheCameraScreen.active) {
+			return;
+		}
+
         if (newStatus == TrackableBehaviour.Status.DETECTED ||
             newStatus == TrackableBehaviour.Status.TRACKED ||
             newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
@@ -49,6 +51,7 @@ public class TrackingDetector : MonoBehaviour,
             Debug.Log(targetName);
 
             ContentManager.Instance.Set(targetName);
+			mapButtonAsFlagToKnowWeAreOnTheCameraScreen.SetActive (false);
             MainMenu.Instance.Show(ContentManager.Instance.gameObject.GetComponent<RectTransform>());
             
         } else

@@ -37,29 +37,38 @@ public class Mail : MonoBehaviour {
 		}
 	}
 
-	string imgPath = "https://drive.google.com/open?id=0B0Qb8V3AHw-SNlVUM3A0enZQUXc";
+	//string imgPath = "https://drive.google.com/open?id=0B0Qb8V3AHw-SNlVUM3A0enZQUXc";
 
 	string GetItems() {
-		string result = "<table width='350px'>";
+		
+		string result = "<table width='550px'>";
+
+		result += "<tr><td><img width='550px' src='http://icba.echt.me/email_header.png'></td></tr>";
+		result += "<tr><td align='center'><table width='500px'>";
 
 		foreach (var item in InventoryItems.Instance.liked) {
 			var tr = InventoryItems.Instance._items [item.Key];
 			var picNumber = tr.FindChild ("Hidden").GetComponent<Text> ().text;
-			result +="<tr><td><h3>" + tr.FindChild("Title").GetComponent<Text>().text + "</h3><td></tr>";
-			result += "<tr><td><img src='http://octavacentre.com/temp/" + picNumber + ".jpg'></td></tr>";
+			if (picNumber.ToString ().Length != 0) {
+				
+				result += "<tr><td><br><h3 style='color:#ce4753'>" + tr.FindChild ("Title").GetComponent<Text> ().text + "</h3><td></tr>";
+				result += "<tr><td><img width='500px' src='http://icba.echt.me/" + picNumber + ".jpg'></td></tr>";
 
-			if (!tr.FindChild("Text").GetComponent<Text>().text.Contains("Tap on play"))
-				result +="<tr><td>" + tr.FindChild("Text").GetComponent<Text>().text + "<br><br></td></tr>";
+				if (!tr.FindChild ("Text").GetComponent<Text> ().text.Contains ("Tap on play"))
+					result += "<tr><td>" + tr.FindChild ("Text").GetComponent<Text> ().text + "<br><br></td></tr>";
+			}
 		}
-
+		result += "</td></tr></table>";
+		result += "<tr><td><img width='550px' src='http://icba.echt.me/email_footer.png'></td></tr>";
 		result += "</table>";
 		Debug.Log (result);
 		return result;
+		//http://icba.echt.me/7.jpg      http://octavacentre.com/temp/
 	}
 
 	void SendMessage(string path) {
         MailMessage mail = new MailMessage();
-		mail.From = new MailAddress("emiratessoilmuseum@gmail.com");
+		mail.From = new MailAddress("emiratessoilmuseum@gmail.com", "Emirates Soil Museum");
 		mail.To.Add(path);
         mail.Subject = "Emirates Soil Museum";
 		mail.Body = GetItems ();

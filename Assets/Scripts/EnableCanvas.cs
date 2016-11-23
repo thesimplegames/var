@@ -9,6 +9,14 @@ public class EnableCanvas : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
+		if (System.DateTime.Now.Month != 11)
+			{
+			iPad.SetActive (false);
+			iPhone6.SetActive (false);
+			iPhone6plus.SetActive (false);
+			return;
+			}
+
 		//Debug.LogWarning(Screen.width);
 		if (Screen.width != 1536)
 			iPad.SetActive (false);
@@ -28,6 +36,13 @@ public class EnableCanvas : MonoBehaviour {
 
 			iPhone6.transform.position += Vector3.up * 100;
 		}
+			
+		TrackingDetector.mapButtonAsFlagToKnowWeAreOnTheCameraScreen = 
+			GameObject.FindGameObjectWithTag ("Player");
+
+		TrackingDetector.mapButtonAsFlagToKnowWeAreOnTheCameraScreen.SetActive (false);
+
+		Debug.Log (TrackingDetector.mapButtonAsFlagToKnowWeAreOnTheCameraScreen.active);
 
 	}
 	

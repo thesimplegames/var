@@ -9,6 +9,7 @@ public class InventoryItems : MonoBehaviour {
     public Dictionary<string, Transform> _items;
 	public Dictionary<string, string> liked = new Dictionary<string, string> ();
     int _recognnized = 1;
+	//public Transform bottom;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +22,8 @@ public class InventoryItems : MonoBehaviour {
         for (int i = -5; i < 80; i++) {
             GameObject newGO = Instantiate(prefab);
             newGO.transform.SetParent(transform);
-            newGO.GetComponent<RectTransform>().localPosition = new Vector3(0, -333 * i + 800 + 333, 0);
+			newGO.transform.FindChild ("Picture").gameObject.GetComponent<Image> ().color = new Color (255, 255, 255, 0);
+            newGO.GetComponent<RectTransform>().localPosition = new Vector3(0, -333 * i + 750 + 333, 0);
 			newGO.transform.localScale = Vector3.one;
             newGO.name =  i.ToString(); 
             rt.position = new Vector3(rt.position.x, rt.position.y - 333 / 2, rt.position.z);
@@ -48,18 +50,21 @@ public class InventoryItems : MonoBehaviour {
                 }
             }
 
+//			bottom.position += -333 * Vector3.up;
+
             _items[_recognnized.ToString()].FindChild("Title").GetComponent<Text>().text = header;
             _items[_recognnized.ToString()].FindChild("Text").GetComponent<Text>().text = text;
             _items[_recognnized.ToString()].FindChild("Picture").GetComponent<Image>().sprite = pic;
+			_items[_recognnized.ToString()].FindChild("Picture").GetComponent<Image>().color = new Color (255, 255, 255, 255);
 			_items[_recognnized.ToString()].FindChild("Hidden").GetComponent<Text>().text = itemName;
+
             _recognnized++;
         } else {
 			liked.Remove (_recognnized.ToString());
 
-            int i = 0;
             bool flag = false;
             Transform prev = null;
-            
+//			bottom.position += 333 * Vector3.up;
 
             foreach (var item in _items.Values) {
                 if (item.FindChild("Title").GetComponent<Text>().text == header) {
@@ -69,6 +74,7 @@ public class InventoryItems : MonoBehaviour {
                     item.FindChild("Text").GetComponent<Text>().text = "";
 					item.FindChild("Hidden").GetComponent<Text>().text = "";
                     item.GetComponent<Image>().sprite = new Sprite();
+					item.GetComponent<Image>().color = new Color (255, 255, 255, 0);
                 }
 
                 if (prev != null) {
@@ -80,10 +86,13 @@ public class InventoryItems : MonoBehaviour {
                         item.FindChild("Text").GetComponent<Text>().text;
                     prev.FindChild("Picture").GetComponent<Image>().sprite =
                         item.FindChild("Picture").GetComponent<Image>().sprite;
+					prev.GetComponent<Image> ().color = item.FindChild ("Picture").GetComponent<Image> ().color;
+
                     item.FindChild("Title").GetComponent<Text>().text = "";
                     item.FindChild("Text").GetComponent<Text>().text = "";
 					item.FindChild("Hidden").GetComponent<Text>().text = "";
                     item.GetComponent<Image>().sprite = new Sprite();
+					item.GetComponent<Image>().color = new Color (255, 255, 255, 0);
                 }
 
                 if (flag)

@@ -83,4 +83,9 @@ public class MainMenu : MonoBehaviour {
         Application.LoadLevel(0);
     }
 
+	public void SetMapButton(bool isSet) {
+		//if (isSet)
+		TrackingDetector.mapButtonAsFlagToKnowWeAreOnTheCameraScreen.SetActive (isSet);
+	}
+
 }

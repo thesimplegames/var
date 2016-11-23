@@ -26,6 +26,7 @@ public class MapController : MonoBehaviour {
     public void SetPosition(string pos, string name, bool set = true) {
         //if (_current != null)
         //    _current.SetActive(false);
+		Debug.Log(pos);
 
         if (!_items.ContainsKey(pos))
             _items.Add(pos, new List<string>());
