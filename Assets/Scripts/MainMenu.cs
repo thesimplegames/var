@@ -88,4 +88,8 @@ public class MainMenu : MonoBehaviour {
 		TrackingDetector.mapButtonAsFlagToKnowWeAreOnTheCameraScreen.SetActive (isSet);
 	}
 
+	public void CheckInventoryForNotZeroItems () {
+		InventoryItems.Instance.sendButton.SetActive(InventoryItems.Instance._recognnized > 1);
+	}
+
 }

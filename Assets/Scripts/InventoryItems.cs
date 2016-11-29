@@ -8,12 +8,15 @@ public class InventoryItems : MonoBehaviour {
     public static InventoryItems Instance;
     public Dictionary<string, Transform> _items;
 	public Dictionary<string, string> liked = new Dictionary<string, string> ();
-    int _recognnized = 1;
+    public int _recognnized = 1;
+	[HideInInspector]
+	public GameObject sendButton;
 	//public Transform bottom;
 
 	// Use this for initialization
 	void Start () {
         Instance = this;
+		sendButton = transform.parent.FindChild ("Button").gameObject;
 
         _items = new Dictionary<string, Transform>();
         RectTransform rt = gameObject.GetComponent<RectTransform>();

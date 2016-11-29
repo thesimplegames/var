@@ -13,6 +13,36 @@ public class Mail : MonoBehaviour {
 	Texture2D texture = null;
 	public InputField pathField;
 	public Button returnButton;
+	GameObject _sentWindow;
+
+	Process _colorProc;
+
+	void Start() {
+		_sentWindow = GameObject.FindGameObjectWithTag ("Sent");
+
+		if (_sentWindow == null)
+			throw new NullReferenceException ("Mail.cs: no Sent Window GO or active==false");
+
+		_sentWindow.SetActive (false);
+	}
+
+	void Update (){
+		if (_sentWindow == null)
+			return;
+
+		if (_colorProc == null)
+			return;
+
+		_colorProc.Update ();
+		var color = _sentWindow.GetComponent<Image> ().color;
+		_sentWindow.GetComponent<Image> ().color = new Color (color.r, color.g, color.b, _colorProc.Progress);
+
+		if (!_colorProc.IsFinished)
+			return;
+
+		_colorProc = null;
+		_sentWindow.GetComponent<Image> ().color = new Color (color.r, color.g, color.b, 1);
+	}
 
 	public void GetScreenshot () {
 		texture = Resources.Load ("media/21") as Texture2D;
@@ -41,26 +71,26 @@ public class Mail : MonoBehaviour {
 
 	string GetItems() {
 		
-		string result = "<table width='550px'>";
+		string result = "<center><table width='100%'>";
 
-		result += "<tr><td><img width='550px' src='http://icba.echt.me/email_header.png'></td></tr>";
-		result += "<tr><td align='center'><table width='500px'>";
+		result += "<tr><td><img width='100%' src='http://icba.echt.me/email_header.png'></td></tr>";
+		result += "<tr align='center'><td align='center' width='90%'><table'><div align = 'center' width='90%'>";
 
 		foreach (var item in InventoryItems.Instance.liked) {
 			var tr = InventoryItems.Instance._items [item.Key];
 			var picNumber = tr.FindChild ("Hidden").GetComponent<Text> ().text;
 			if (picNumber.ToString ().Length != 0) {
 				
-				result += "<tr><td><br><h3 style='color:#ce4753'>" + tr.FindChild ("Title").GetComponent<Text> ().text + "</h3><td></tr>";
-				result += "<tr><td><img width='500px' src='http://icba.echt.me/" + picNumber + ".jpg'></td></tr>";
+				result += "<tr><td><br><h1 style='color:#ce4753'>" + tr.FindChild ("Title").GetComponent<Text> ().text + "</h1><td></tr>";
+				result += "<tr><td><img width='100%' src='http://icba.echt.me/" + picNumber + ".jpg'></td></tr>";
 
 				if (!tr.FindChild ("Text").GetComponent<Text> ().text.Contains ("Tap on play"))
-					result += "<tr><td>" + tr.FindChild ("Text").GetComponent<Text> ().text + "<br><br></td></tr>";
+					result += "<tr><td><h3>" + tr.FindChild ("Text").GetComponent<Text> ().text + "</h3><br><br></td></tr>";
 			}
 		}
-		result += "</td></tr></table>";
-		result += "<tr><td><img width='550px' src='http://icba.echt.me/email_footer.png'></td></tr>";
-		result += "</table>";
+		result += "</div></td></tr></table>";
+		result += "<tr><td><img width='100%' src='http://icba.echt.me/email_footer.png'></td></tr>";
+		result += "</table></center>";
 		Debug.Log (result);
 		return result;
 		//http://icba.echt.me/7.jpg      http://octavacentre.com/temp/
@@ -83,7 +113,12 @@ public class Mail : MonoBehaviour {
 			return true;
 		};
 		smtpServer.Send (mail);
-		returnButton.onClick.Invoke ();
+		//returnButton.onClick.Invoke ();
+
+		_colorProc = new Process (1f, false, null);
+		_sentWindow.SetActive (true);
+		Update ();
+
 		Debug.Log ("Message sended");
 
 		//Debug.Log ("success");
