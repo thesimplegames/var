@@ -9,13 +9,13 @@ public class EnableCanvas : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		if (System.DateTime.Now.Month != 11)
-			{
+		if (System.DateTime.Now.Month != 12)
+		{
 			iPad.SetActive (false);
 			iPhone6.SetActive (false);
 			iPhone6plus.SetActive (false);
 			return;
-			}
+		}
 
 		//Debug.LogWarning(Screen.width);
 		if (Screen.width != 1536)
