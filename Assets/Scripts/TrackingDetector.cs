@@ -51,7 +51,7 @@ public class TrackingDetector : MonoBehaviour,
             Debug.Log(targetName);
 
             ContentManager.Instance.Set(targetName);
-			mapButtonAsFlagToKnowWeAreOnTheCameraScreen.SetActive (false);
+			mapButtonAsFlagToKnowWeAreOnTheCameraScreen.SetActive (false); 
             MainMenu.Instance.Show(ContentManager.Instance.gameObject.GetComponent<RectTransform>());
             
         } else

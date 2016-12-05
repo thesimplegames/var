@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour {
 
     Process _movingProcess;
     float _movingTime = 0.5f;
+	bool _mainMenuOpened = false;
 
     public static MainMenu Instance;
 
@@ -64,6 +65,9 @@ public class MainMenu : MonoBehaviour {
             rt.position = new Vector3(startX + rt.sizeDelta.x * _movingProcess.Progress,
                 rt.position.y, rt.position.z);
         };
+
+		if (rt.gameObject.name.Contains ("MainMenu"))
+			_mainMenuOpened = !_mainMenuOpened;
     }
 
     public void Hide(RectTransform rt) {
@@ -77,6 +81,12 @@ public class MainMenu : MonoBehaviour {
             rt.position = new Vector3(startX - rt.sizeDelta.x * _movingProcess.Progress,
                 rt.position.y, rt.position.z);
         };
+
+		if (rt.gameObject.name.Contains ("MainMenu"))
+			_mainMenuOpened = !_mainMenuOpened;
+
+		if (_mainMenuOpened && rt.gameObject.name.Contains ("Map"))
+			TrackingDetector.mapButtonAsFlagToKnowWeAreOnTheCameraScreen.SetActive (false);
     }
 
     public void Reset () {
@@ -89,7 +99,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	public void CheckInventoryForNotZeroItems () {
-		InventoryItems.Instance.sendButton.SetActive(InventoryItems.Instance._recognnized > 1);
+		InventoryItems.Instance.sendButton.SetActive(InventoryItems.Instance.Recognized > 1);
 	}
 
 }
