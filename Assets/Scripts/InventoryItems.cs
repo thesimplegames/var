@@ -23,10 +23,14 @@ public class InventoryItems : MonoBehaviour {
 			new Vector2 (
 			transform.gameObject.GetComponent<RectTransform> ().sizeDelta.x,
 			transform.gameObject.GetComponent<RectTransform> ().sizeDelta.y + 333f * (_recognized > value ? -1 : 1));
-			
+			/*
 			transform.localPosition = new Vector3 (transform.localPosition.x, 
 				transform.localPosition.y + 333f * (_recognized > value ? -1 : 1),
 				transform.localPosition.z);
+*/
+			for (int i = -5; i < 80; i++) {
+				transform.FindChild (i.ToString ()).localPosition -= Vector3.up * 333f/2 * (_recognized > value ? -1 : 1);
+			}
 
 			_recognized = value;
 		}
@@ -55,10 +59,11 @@ public class InventoryItems : MonoBehaviour {
             GameObject newGO = Instantiate(prefab);
             newGO.transform.SetParent(transform);
 			newGO.transform.FindChild ("Picture").gameObject.GetComponent<Image> ().color = new Color (255, 255, 255, 0);
-            newGO.GetComponent<RectTransform>().localPosition = new Vector3(0, -333 * i + 475 + 333, 0);
+            newGO.GetComponent<RectTransform>().localPosition = new Vector3(0, -333 * i + 475 + 333, 0) +
+				(EnableCanvas.Instance.IsIpad ? Vector3.zero : Vector3.up * 300 );
 			newGO.transform.localScale = Vector3.one;
             newGO.name =  i.ToString(); 
-			newGO.transform.FindChild ("Title").GetComponent<Text> ().text = i.ToString ();
+			//newGO.transform.FindChild ("Title").GetComponent<Text> ().text = i.ToString ();
             rt.position = new Vector3(rt.position.x, rt.position.y - 333 / 2, rt.position.z);
             rt.sizeDelta = new Vector2(rt.sizeDelta.x, rt.sizeDelta.y);
             _items.Add(newGO.name, newGO.transform);

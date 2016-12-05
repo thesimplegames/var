@@ -3,12 +3,19 @@ using System.Collections;
 
 public class EnableCanvas : MonoBehaviour {
 
+	public static EnableCanvas Instance;
+
 	public GameObject iPad;
 	public GameObject iPhone6;
 	public GameObject iPhone6plus;
+	public bool IsIpad {
+		get { return iPad.active; }
+	}
 
 	// Use this for initialization
 	void Awake () {
+		Instance = this;
+
 		if (System.DateTime.Now.Month != 12)
 		{
 			iPad.SetActive (false);
