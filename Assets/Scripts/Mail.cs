@@ -59,7 +59,7 @@ public class Mail : MonoBehaviour {
 			textPath.text = "You have no items in your inventory";
 			return;
 		}
-			
+
 		if (textPath.text.Contains ("@")) {
 			SendMessage (textPath.text);
 		} else {
@@ -70,25 +70,25 @@ public class Mail : MonoBehaviour {
 	//string imgPath = "https://drive.google.com/open?id=0B0Qb8V3AHw-SNlVUM3A0enZQUXc";
 
 	string GetItems() {
-		
+
 		string result = "<center><table width='100%'>";
 
 		result += "<tr><td><img width='100%' src='http://icba.echt.me/email_header.png'></td></tr>";
-		result += "<tr align='center'><td align='center' width='90%'><table'><div align = 'center' width='90%'>";
+		result += "<tr><td><div><table>";
 
 		foreach (var item in InventoryItems.Instance.liked) {
 			var tr = InventoryItems.Instance._items [item.Key];
 			var picNumber = tr.FindChild ("Hidden").GetComponent<Text> ().text;
 			if (picNumber.ToString ().Length != 0) {
-				
-				result += "<tr><td><br><h1 style='color:#ce4753'>" + tr.FindChild ("Title").GetComponent<Text> ().text + "</h1><td></tr>";
-				result += "<tr><td><img width='100%' src='http://icba.echt.me/" + picNumber + ".jpg'></td></tr>";
+
+				result += "<tr><td width='5%'></td><td width='90%'><br><h1 style='color:#ce4753'>" + tr.FindChild ("Title").GetComponent<Text> ().text + "</h1></td><td width='5%'></td></tr>";
+				result += "<tr><td width='5%'></td><td width='90%'><img width='100%' src='http://icba.echt.me/" + picNumber + ".jpg'></td><td width='5%'></td></tr>";
 
 				if (!tr.FindChild ("Text").GetComponent<Text> ().text.Contains ("Tap on play"))
-					result += "<tr><td><h3>" + tr.FindChild ("Text").GetComponent<Text> ().text + "</h3><br><br></td></tr>";
+					result += "<tr><td width='5%'></td><td width='90%'><h3>" + tr.FindChild ("Text").GetComponent<Text> ().text + "</h3><br><br></td><td width='5%'></td></tr>";
 			}
 		}
-		result += "</div></td></tr></table>";
+		result += "</div></td></tr></table></td></tr>";
 		result += "<tr><td><img width='100%' src='http://icba.echt.me/email_footer.png'></td></tr>";
 		result += "</table></center>";
 		Debug.Log (result);
@@ -97,10 +97,10 @@ public class Mail : MonoBehaviour {
 	}
 
 	void SendMessage(string path) {
-        MailMessage mail = new MailMessage();
+		MailMessage mail = new MailMessage();
 		mail.From = new MailAddress("emiratessoilmuseum@gmail.com", "Emirates Soil Museum");
 		mail.To.Add(path);
-        mail.Subject = "Emirates Soil Museum";
+		mail.Subject = "Emirates Soil Museum";
 		mail.Body = GetItems ();
 		mail.IsBodyHtml = true;
 
@@ -109,7 +109,7 @@ public class Mail : MonoBehaviour {
 		smtpServer.Credentials = new System.Net.NetworkCredential ("emiratessoilmuseum@gmail.com", "123a456S") as ICredentialsByHost;
 		smtpServer.EnableSsl = true;
 		ServicePointManager.ServerCertificateValidationCallback =
-	    delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) {
+			delegate (object s, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors) {
 			return true;
 		};
 		smtpServer.Send (mail);
@@ -123,7 +123,7 @@ public class Mail : MonoBehaviour {
 
 		//Debug.Log ("success");
 
-    }
-		
+	}
+
 
 }
