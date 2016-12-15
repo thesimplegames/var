@@ -71,7 +71,7 @@ public class Mail : MonoBehaviour {
 
 	string GetItems() {
 
-		string result = "<center><table width='100%'>";
+		string result = "<center><table width='100%' style='max-width:640px;'>";
 
 		result += "<tr><td><img width='100%' src='http://icba.echt.me/email_header.png'></td></tr>";
 		result += "<tr><td><div><table>";

@@ -16,14 +16,6 @@ public class EnableCanvas : MonoBehaviour {
 	void Awake () {
 		Instance = this;
 
-		if (System.DateTime.Now.Month != 12)
-		{
-			iPad.SetActive (false);
-			iPhone6.SetActive (false);
-			iPhone6plus.SetActive (false);
-			return;
-		}
-
 		//Debug.LogWarning(Screen.width);
 		if (Screen.width != 1536)
 			iPad.SetActive (false);
